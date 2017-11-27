@@ -1,0 +1,25 @@
+/*
+	* This is my Sublime text build C++ file.
+	* Define new flag with -D[name_of_flag]
+*/
+/*
+	* This also handles <pthread.h> 
+*/
+{
+	"cmd": ["g++","-DKP", "-Wall", "-pthread","-std=c++11", "${file}", "-o", "${file_path}/${1}.out"],
+	"file_regex": "^(..[^:]*):([0-9]+):?([0-9]+)?:? (.*)$",
+	"working_dir": "${file_path}",
+	"selector": "source.c, source.c++",
+
+	"variants":
+	[
+		{
+			"name": "submitting",
+			"cmd": ["x-terminal-emulator", "-e", "bash", "-c", "g++ -Wall -pthread -std=c++11 '${file}' -o '${file_path}/${1}.out' && '${file_path}/${1}.out'; read -p 'Press any key to continue...'"]
+		},
+		{
+			"name": "local",
+			"cmd": ["x-terminal-emulator", "-e", "bash", "-c", "g++ -DKP -Wall -pthread -std=c++11 '${file}' -o '${file_path}/${1}.out' && '${file_path}/${1}.out'; read -p 'Press any key to continue...'"]
+		}
+	]
+}
